@@ -35,7 +35,8 @@ def index():
 		ip = request.access_route
 	else:
    		ip = request.remote_addr
-	print ip
+	with open("logs.txt","w") as f:
+		f.write(ip)
 	log = Logger(ip)
 	db.session.add(log)
 	db.session.commit()
