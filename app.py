@@ -29,7 +29,10 @@ def gateway():
 
 @app.route("/index")
 def index():
-	ip = request.remote_addr
+	if request.headers.getlist("X-Forwarded-For"):
+   		ip = request.headers.getlist("X-Forwarded-For")[0]
+	else:
+   		ip = request.remote_addr
 	log = Logger(ip)
 	db.session.add(log)
 	db.session.commit()
