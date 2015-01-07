@@ -20,9 +20,9 @@ class Logger(db.Model):
 @app.route("/")
 def gateway():
 	ip = request.remote_addr
-	# log = Logger(ip)
-	# db.session.add(log)
-	# db.session.commit()
+	log = Logger(ip)
+	db.session.add(log)
+	db.session.commit()
 	return render_template("gateway.html")
 
 @app.route("/index")
