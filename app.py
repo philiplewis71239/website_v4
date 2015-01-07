@@ -31,8 +31,11 @@ def gateway():
 def index():
 	if request.headers.getlist("X-Forwarded-For"):
    		ip = request.headers.getlist("X-Forwarded-For")[0]
+	elif request.access_route:
+		ip = request.access_route
 	else:
    		ip = request.remote_addr
+	print ip
 	log = Logger(ip)
 	db.session.add(log)
 	db.session.commit()
